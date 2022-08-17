@@ -1,0 +1,13 @@
+{
+  "name": "toshida-zipsymlink",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "ln -s sub/test2.txt symLinked.txt",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
