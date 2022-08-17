@@ -89,4 +89,4 @@ jobs:
           app-name: 'toshida-zipSymlink'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6B024C0F8654BEB8240820D5719245B }}
-          package: .
+          package: myzip.zip
