@@ -70,6 +70,18 @@ jobs:
         run: |
           tree
 
+      - name: Unzip
+        run: |
+          mkdir -p unzipDir
+          cp myzip.zip ./unzipDir/
+          cd ./unzipDir
+          unzip myzip.zip
+          cd ../
+
+      - name: Check After
+        run: |
+          tree
+          
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
