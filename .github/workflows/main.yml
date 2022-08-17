@@ -29,11 +29,15 @@ jobs:
     needs: build
 
     steps:
+      - name: Check Before
+        run: |
+          tree
+
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
           name: app
 
-      - name: Check
+      - name: Check After
         run: |
           tree
