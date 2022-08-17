@@ -1,0 +1,69 @@
+name: artifact check
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:          
+      - name: setup
+        run: |
+          touch base.txt
+          echo "base" >> base.txt
+          ln -s  base.txt ./linked.txt
+          tree
+
+      - name: check1
+        run: |
+          tree
+
+      - name: Upload current directory as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: test1
+          path: .
+
+      - name: Create zip with symlink
+        run: zip --symlinks -r myzip.zip ./*
+
+      - name: Upload zip as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: test2
+          path: myzip.zip
+          
+      - name: Create download directory
+        run: |
+          mkdir -p ./download/1
+          mkdir -p ./download/2
+
+      - name: Download artifact1
+        uses: actions/download-artifact@v2
+        with:
+          name: test1
+          path: ./download/1
+
+      - name: Download artifact2
+        uses: actions/download-artifact@v2
+        with:
+          name: test2
+          path: ./download/2
+
+      - name: Check download 1
+        run: |
+          tree download/1
+          
+      - name: Unzip
+        run: |
+          cd ./download/2
+          unzip myzip.zip
+          cd ../../
+          
+      - name: Check download 2
+        run: |
+          tree download/2
