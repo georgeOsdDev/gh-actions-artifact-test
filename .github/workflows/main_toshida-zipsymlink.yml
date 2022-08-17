@@ -52,7 +52,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
-
+          
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: myzip
+          
       - name: Check After
         run: |
           tree
@@ -64,4 +69,4 @@ jobs:
           app-name: 'toshida-zipSymlink'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6B024C0F8654BEB8240820D5719245B }}
-          package: .
+          package: myzip
