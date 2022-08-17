@@ -62,6 +62,7 @@ jobs:
         run: |
           cd ./download/2
           unzip myzip.zip
+          rm myzip.zip
           cd ../../
           
       - name: Check download 2
