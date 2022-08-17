@@ -18,11 +18,25 @@ jobs:
           mkdir -p test
           ln -s  README.md ./test/linked_readme
           tree
+
+      - name: check
+        run: |
+          tree
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: app
           path: .
+
+      - name: Zip all files for upload between jobs
+        run: zip --symlinks -r myzip.zip ./*
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: myzip
+          path: myzip.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -41,3 +55,25 @@ jobs:
       - name: Check After
         run: |
           tree
+
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: myzip
+
+      - name: Check After2
+        run: |
+          tree
+          
+      - name: Unzip
+        run: |
+          mkdir -p unzipDir
+          mv myzip.zip ./unzipDir
+          cd ./unzipDir
+          unzip myzip.zip
+          cd ../
+          
+      - name: Check After3
+        run: |
+          tree
+        
