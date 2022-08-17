@@ -35,7 +35,15 @@ jobs:
         with:
           name: node-app
           path: .
+          
+      - name: Zip all files for upload between jobs
+        run: zip --symlinks -r myzip.zip ./*
 
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: myzip
+          path: myzip.zip
   deploy:
     runs-on: ubuntu-latest
     needs: build
