@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "mkdir sub2 && ln -s sub/test2.txt sub2/symLinked.txt",
+    "preinstall": "mkdir sub2 && ln -s ../sub/test2.txt sub2/symLinked.txt",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
