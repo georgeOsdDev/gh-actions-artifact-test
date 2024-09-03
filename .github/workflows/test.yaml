@@ -43,13 +43,13 @@ jobs:
           mkdir -p ./download/2
 
       - name: Download artifact1
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: test1
           path: ./download/1
 
       - name: Download artifact2
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: test2
           path: ./download/2
